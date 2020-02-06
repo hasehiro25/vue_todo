@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css"
+    />
+    <link rel="stylesheet" href="./style.css" />
+    <script
+      defer
+      src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"
+    ></script>
+    <title>TODO LIST</title>
+  </head>
+
+  <body>
+    <div id="app">
+      <section class="section">
+        <div class="container">
+          <h1 class="title">ToDo LiiiiiiiiiiST</h1>
+          <form id="input" @submit.prevent="createTask">
+            <div class="columns is-centered">
+              <div class="column is-6">
+                <input
+                  type="text"
+                  class="input is-rounded"
+                  v-model.trim="message"
+                />
+              </div>
+              <div class="column is-3">
+                <input type="submit" class="button is-primary" value="ポスト" />
+              </div>
+            </div>
+          </form>
+        </div>
+      </section>
+      <section class="section">
+        <div class="container">
+          <div class="columns is-centered">
+            <div class="column is-one-third">
+              <h2 class="title">TO DO</h2>
+              <button class="button is-success" @click="clearAllIncompleteTasks">CLEAR ALL</button>
+              <ul>
+                <div v-cloak class="card" v-for="(task, index) in incompletedTasks">
+                  <div class="card-content">
+                    <p class="is-size-5">
+                       {{ task }}
+                    </p>
+                    <footer class="card-footer">
+                      <p class="card-footer-item">
+                  <button
+                    class="button is-success is-rounded"
+                    @click="completeTask(index)"
+                  >
+                    DONE
+                  </button>
+                  </p>
+                  <p class="card-footer-item">
+                  <button class="button" @click="deleteIncompleteTask(index)">
+                    <span class="icon is-small">
+                      <i class="fas fa-trash"></i>
+                    </span>
+                  </button>
+                </p>
+                </div>
+              </ul>
+            </div>
+            <div class="column is-one-third is-offset-one-fifth">
+              <h2 class="title">COMPLETED</h2>
+              <button class="button is-danger" @click="clearAllCompletedTasks">CLEAR ALL</button>
+                <div v-cloak class="card" v-for="(task, index) in completedTasks">
+                  <div class="card-content">
+                    <p class="is-size-5">
+                      <span style="text-decoration: line-through;">{{ task }}</span>
+                    </p>
+                  </div>
+                  <footer class="card-footer">
+                    <p class="card-footer-item">
+                      <button
+                        class="button is-danger is-rounded"
+                        @click="clearCompletedTask(index)"
+                      >
+                        CLEAR
+                      </button>
+                    </p>
+                    <p class="card-footer-item">
+                      <button class="button" @click="undoTask(index)">
+                        <span class="icon is-small">
+                          <i class="fas fa-undo"></i>
+                        </span>
+                      </button>
+                    </p>
+                  </footer>
+                </div>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    <script src="index.js"></script>
+  </body>
+</html>
