@@ -2,7 +2,6 @@ const app = new Vue({
   el: "#app",
   data: {
     message: "",
-    storage: localStorage.getItem("foo"),
     incompletedTasks: [],
     completedTasks: []
   },
